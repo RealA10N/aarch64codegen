@@ -21,6 +21,8 @@ func TestAdd(t *testing.T) {
 		registers.X28,
 	))
 
+}
+func TestAddWithXZR(t *testing.T) {
 	AssertExpectedInstruction(t, "ADD XZR, X1, X2", instructions.ADD(
 		registers.XZR,
 		registers.X1,
@@ -36,6 +38,12 @@ func TestAdd(t *testing.T) {
 	AssertExpectedInstruction(t, "ADD X0, X1, XZR", instructions.ADD(
 		registers.X0,
 		registers.X1,
+		registers.XZR,
+	))
+
+	AssertExpectedInstruction(t, "ADD XZR, XZR, XZR", instructions.ADD(
+		registers.XZR,
+		registers.XZR,
 		registers.XZR,
 	))
 }

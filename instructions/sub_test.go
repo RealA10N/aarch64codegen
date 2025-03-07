@@ -24,22 +24,6 @@ func TestSub(t *testing.T) {
 	))
 }
 
-func TestSubImm(t *testing.T) {
-	// SUB X3, X4, #10
-	AssertExpectedInstruction(t, "SUB X3, X4, #10", instructions.SUBI(
-		registers.X3,
-		registers.GPorSPRegister(registers.X4),
-		immediates.Immediate12(10),
-	))
-
-	// SUB X20, SP, #1000
-	AssertExpectedInstruction(t, "SUB X20, SP, #1000", instructions.SUBI(
-		registers.X20,
-		registers.SP,
-		immediates.Immediate12(1000),
-	))
-}
-
 func TestSubWithXZR(t *testing.T) {
 	// Test SUB with XZR as destination
 	AssertExpectedInstruction(t, "SUB XZR, X4, X5", instructions.SUB(
@@ -60,5 +44,28 @@ func TestSubWithXZR(t *testing.T) {
 		registers.X3,
 		registers.X4,
 		registers.XZR,
+	))
+
+	// Multiple XZR registers
+	AssertExpectedInstruction(t, "SUB XZR, XZR, XZR", instructions.SUB(
+		registers.XZR,
+		registers.XZR,
+		registers.XZR,
+	))
+}
+
+func TestSubImm(t *testing.T) {
+	// SUB X3, X4, #10
+	AssertExpectedInstruction(t, "SUB X3, X4, #10", instructions.SUBI(
+		registers.X3,
+		registers.GPorSPRegister(registers.X4),
+		immediates.Immediate12(10),
+	))
+
+	// SUB X20, SP, #1000
+	AssertExpectedInstruction(t, "SUB X20, SP, #1000", instructions.SUBI(
+		registers.X20,
+		registers.SP,
+		immediates.Immediate12(1000),
 	))
 }
