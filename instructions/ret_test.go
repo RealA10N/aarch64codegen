@@ -18,3 +18,7 @@ func TestRet2(t *testing.T) {
 func TestRet3(t *testing.T) {
 	AssertExpectedInstruction(t, "RET X29", instructions.RET(registers.X29))
 }
+
+func TestRetWithXZR(t *testing.T) {
+	AssertExpectedInstruction(t, "RET XZR", instructions.RET(registers.XZR))
+}

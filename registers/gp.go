@@ -36,10 +36,11 @@ const (
 	X28
 	X29
 	X30
+	XZR // Zero register (X31)
 )
 
 func (r GPRegister) Validate() error {
-	if r > X30 {
+	if r > XZR {
 		return fmt.Errorf("invalid general purpose register: %d", r)
 	}
 	return nil
@@ -50,5 +51,8 @@ func (r GPRegister) Binary() uint32 {
 }
 
 func (r GPRegister) String() string {
+	if r == XZR {
+		return "XZR"
+	}
 	return fmt.Sprintf("X%d", r)
 }

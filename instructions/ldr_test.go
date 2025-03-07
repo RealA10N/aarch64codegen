@@ -15,3 +15,21 @@ func TestLdr1(t *testing.T) {
 		immediates.Immediate9(8),
 	))
 }
+
+func TestLdrWithSP(t *testing.T) {
+	// Test LDR with SP as the base register
+	AssertExpectedInstruction(t, "LDR X5, [SP], #16", instructions.LDR(
+		registers.X5,
+		registers.SP, // Using SP directly
+		immediates.Immediate9(16),
+	))
+}
+
+func TestLdrWithXZR(t *testing.T) {
+	// Test LDR with XZR as destination register
+	AssertExpectedInstruction(t, "LDR XZR, [X1], #8", instructions.LDR(
+		registers.XZR,
+		registers.GPorSPRegister(registers.X1),
+		immediates.Immediate9(8),
+	))
+}
