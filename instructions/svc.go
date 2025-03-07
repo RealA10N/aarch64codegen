@@ -1,4 +1,3 @@
-// filepath: /Users/alonkr/Developer/aarch64codegen/instructions/svc.go
 package instructions
 
 import (
