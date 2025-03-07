@@ -1,6 +1,8 @@
 package instructions
 
 import (
+	"fmt"
+
 	"alon.kr/x/aarch64codegen/immediates"
 )
 
@@ -10,9 +12,12 @@ func BL(offset immediates.Offset26Align4) Bl {
 	return Bl(0b100101<<26 | offset.Binary())
 }
 
+func (i Bl) Offset() immediates.Offset26Align4 {
+	return immediates.Offset26Align4(i & 0x3FFFFFF)
+}
+
 func (i Bl) String() string {
-	offset := immediates.Offset26Align4(i & 0x3FFFFFF)
-	return "BL " + offset.String()
+	return fmt.Sprintf("BL %s", i.Offset())
 }
 
 func (i Bl) Binary() uint32 {

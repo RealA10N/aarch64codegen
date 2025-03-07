@@ -28,11 +28,20 @@ func (i Add) Binary() uint32 {
 	return uint32(i)
 }
 
+func (i Add) Xd() registers.GPRegister {
+	return registers.GPRegister(i & 0x1F)
+}
+
+func (i Add) Xn() registers.GPRegister {
+	return registers.GPRegister((i >> 5) & 0x1F)
+}
+
+func (i Add) Xm() registers.GPRegister {
+	return registers.GPRegister((i >> 16) & 0x1F)
+}
+
 func (i Add) String() string {
-	Xd := registers.GPRegister(i & 0x1F)
-	Xn := registers.GPRegister((i >> 5) & 0x1F)
-	Xm := registers.GPRegister((i >> 16) & 0x1F)
-	return fmt.Sprintf("ADD %s, %s, %s", Xd, Xn, Xm)
+	return fmt.Sprintf("ADD %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
 }
 
 // ADDI instruction (ADD with immediate)
@@ -55,9 +64,18 @@ func (i AddImm) Binary() uint32 {
 	return uint32(i)
 }
 
+func (i AddImm) Xd() registers.GPorSPRegister {
+	return registers.GPorSPRegister(i & 0x1F)
+}
+
+func (i AddImm) Xn() registers.GPorSPRegister {
+	return registers.GPorSPRegister((i >> 5) & 0x1F)
+}
+
+func (i AddImm) Imm() immediates.Immediate12 {
+	return immediates.Immediate12((i >> 10) & 0xFFF)
+}
+
 func (i AddImm) String() string {
-	Xd := registers.GPorSPRegister(i & 0x1F)
-	Xn := registers.GPorSPRegister((i >> 5) & 0x1F)
-	imm := immediates.Immediate12((i >> 10) & 0xFFF)
-	return fmt.Sprintf("ADD %s, %s, %s", Xd, Xn, imm)
+	return fmt.Sprintf("ADD %s, %s, %s", i.Xd(), i.Xn(), i.Imm())
 }

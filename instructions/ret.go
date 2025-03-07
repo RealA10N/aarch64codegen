@@ -10,11 +10,15 @@ func RET(Xn registers.GPRegister) Ret {
 	return Ret(0xD65F0000 | (Xn.Binary() << 5))
 }
 
+func (i Ret) Xn() registers.GPRegister {
+	return registers.GPRegister((i >> 5) & 0b11111)
+}
+
 func (r Ret) String() string {
-	register := registers.GPRegister((r >> 5) & 0b11111)
+	Xn := r.Xn()
 	s := "RET"
-	if register != registers.X30 {
-		s += " " + register.String()
+	if Xn != registers.X30 {
+		s += " " + Xn.String()
 	}
 	return s
 }

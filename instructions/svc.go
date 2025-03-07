@@ -16,7 +16,10 @@ func (i Svc) Binary() uint32 {
 	return uint32(i)
 }
 
+func (i Svc) Imm() uint16 {
+	return uint16((i >> 5) & 0xFFFF)
+}
+
 func (i Svc) String() string {
-	imm16 := (i >> 5) & 0xFFFF
-	return fmt.Sprintf("SVC #%d", imm16)
+	return fmt.Sprintf("SVC #%d", i.Imm())
 }

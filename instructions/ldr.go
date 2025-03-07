@@ -26,11 +26,21 @@ func (i Ldr) Binary() uint32 {
 	return uint32(i)
 }
 
+func (i Ldr) Xt() registers.GPRegister {
+	return registers.GPRegister(i & 0x1F)
+}
+
+func (i Ldr) Xn() registers.GPorSPRegister {
+	return registers.GPorSPRegister((i >> 5) & 0x1F)
+}
+
+func (i Ldr) Imm() immediates.Immediate9 {
+	return immediates.Immediate9((i >> 12) & 0x1FF)
+}
+
 func (i Ldr) String() string {
-	imm := immediates.Immediate9((i >> 12) & 0x1FF)
-	Xn := registers.GPorSPRegister((i >> 5) & 0x1F)
-	Xt := registers.GPRegister(i & 0x1F)
-	s := fmt.Sprintf("LDR %s, [%s]", Xt, Xn)
+	s := fmt.Sprintf("LDR %s, [%s]", i.Xt(), i.Xn())
+	imm := i.Imm()
 	if imm != 0 {
 		s += ", " + imm.String()
 	}
