@@ -17,8 +17,17 @@ func NewShift6(shiftType ShiftType, amount Immediate6) Shift6 {
 	}
 }
 
+func NoShift6() Shift6 {
+	return Shift6{Type: LSL, Amount: 0}
+}
+
 func (s Shift6) Validate() error {
 	return s.Amount.Validate()
+}
+
+// HasShift returns true if there is a non-zero shift amount
+func (s Shift6) HasShift() bool {
+	return s.Amount != 0
 }
 
 func (s Shift6) String() string {
