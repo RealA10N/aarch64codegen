@@ -3,10 +3,34 @@ package instructions_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"alon.kr/x/aarch64codegen/immediates"
 	"alon.kr/x/aarch64codegen/instructions"
 	"alon.kr/x/aarch64codegen/registers"
 )
+
+func TestMovShiftValidateValid(t *testing.T) {
+	// Valid shift values should not return an error
+	validShifts := []instructions.MovShift{
+		instructions.MovShift0,
+		instructions.MovShift16,
+		instructions.MovShift32,
+		instructions.MovShift48,
+	}
+
+	for _, shift := range validShifts {
+		err := shift.Validate()
+		assert.NoError(t, err)
+	}
+}
+
+func TestMovShiftValidateInvalid(t *testing.T) {
+	// Invalid shift value (greater than 3) should return an error
+	invalidShift := instructions.MovShift(4)
+	err := invalidShift.Validate()
+	assert.Error(t, err)
+}
 
 func TestMovz1(t *testing.T) {
 	AssertExpectedInstruction(t, "MOVZ X0, #1234, LSL #32", instructions.MOVZ(
