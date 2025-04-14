@@ -17,7 +17,7 @@ func (i Ret) Xn() registers.GPRegister {
 func (r Ret) String() string {
 	Xn := r.Xn()
 	s := "RET"
-	if Xn != registers.X30 {
+	if Xn != registers.GPRegisterX30 {
 		s += " " + Xn.String()
 	}
 	return s

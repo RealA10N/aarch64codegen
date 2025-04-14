@@ -5,42 +5,42 @@ import "fmt"
 type GPRegister uint8
 
 const (
-	X0 GPRegister = iota
-	X1
-	X2
-	X3
-	X4
-	X5
-	X6
-	X7
-	X8
-	X9
-	X10
-	X11
-	X12
-	X13
-	X14
-	X15
-	X16
-	X17
-	X18
-	X19
-	X20
-	X21
-	X22
-	X23
-	X24
-	X25
-	X26
-	X27
-	X28
-	X29
-	X30
-	XZR // Zero register (X31)
+	GPRegisterX0 GPRegister = iota
+	GPRegisterX1
+	GPRegisterX2
+	GPRegisterX3
+	GPRegisterX4
+	GPRegisterX5
+	GPRegisterX6
+	GPRegisterX7
+	GPRegisterX8
+	GPRegisterX9
+	GPRegisterX10
+	GPRegisterX11
+	GPRegisterX12
+	GPRegisterX13
+	GPRegisterX14
+	GPRegisterX15
+	GPRegisterX16
+	GPRegisterX17
+	GPRegisterX18
+	GPRegisterX19
+	GPRegisterX20
+	GPRegisterX21
+	GPRegisterX22
+	GPRegisterX23
+	GPRegisterX24
+	GPRegisterX25
+	GPRegisterX26
+	GPRegisterX27
+	GPRegisterX28
+	GPRegisterX29
+	GPRegisterX30
+	GPRegisterXZR // Zero register (X31)
 )
 
 func (r GPRegister) Validate() error {
-	if r > XZR {
+	if r > GPRegisterXZR {
 		return fmt.Errorf("invalid general purpose register: %d", r)
 	}
 	return nil
@@ -51,7 +51,7 @@ func (r GPRegister) Binary() uint32 {
 }
 
 func (r GPRegister) String() string {
-	if r == XZR {
+	if r == GPRegisterXZR {
 		return "XZR"
 	}
 	return fmt.Sprintf("X%d", r)

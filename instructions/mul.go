@@ -14,7 +14,7 @@ func MUL(
 	Xn registers.GPRegister,
 	Xm registers.GPRegister,
 ) Mul {
-	return Mul(MADD(Xd, Xn, Xm, registers.XZR))
+	return Mul(MADD(Xd, Xn, Xm, registers.GPRegisterXZR))
 }
 
 func (i Mul) Binary() uint32 {

@@ -10,8 +10,8 @@ import (
 
 func TestLdr1(t *testing.T) {
 	AssertExpectedInstruction(t, "LDR X0, [X1], #8", instructions.LDR(
-		registers.X0,
-		registers.GPorSPRegister(registers.X1),
+		registers.GPRegisterX0,
+		registers.GPorSPRegisterX1,
 		immediates.Immediate9(8),
 	))
 }
@@ -19,8 +19,8 @@ func TestLdr1(t *testing.T) {
 func TestLdrWithSP(t *testing.T) {
 	// Test LDR with SP as the base register
 	AssertExpectedInstruction(t, "LDR X5, [SP], #16", instructions.LDR(
-		registers.X5,
-		registers.SP, // Using SP directly
+		registers.GPRegisterX5,
+		registers.GPorSPRegisterSP, // Using SP directly
 		immediates.Immediate9(16),
 	))
 }
@@ -28,8 +28,8 @@ func TestLdrWithSP(t *testing.T) {
 func TestLdrWithXZR(t *testing.T) {
 	// Test LDR with XZR as destination register
 	AssertExpectedInstruction(t, "LDR XZR, [X1], #8", instructions.LDR(
-		registers.XZR,
-		registers.GPorSPRegister(registers.X1),
+		registers.GPRegisterXZR,
+		registers.GPorSPRegisterX1,
 		immediates.Immediate9(8),
 	))
 }
