@@ -15,9 +15,11 @@ func ADD(
 	Xd registers.GPRegister,
 	Xn registers.GPRegister,
 	Xm registers.GPRegister,
+	setFlags immediates.SetFlags,
 ) Add {
 	return Add(
 		0x8B000000 |
+			(setFlags.Binary()) |
 			(Xm.Binary() << 16) |
 			(Xn.Binary() << 5) |
 			(Xd.Binary()),
@@ -40,8 +42,12 @@ func (i Add) Xm() registers.GPRegister {
 	return registers.GPRegister((i >> 16) & 0x1F)
 }
 
+func (i Add) SetFlags() immediates.SetFlags {
+	return immediates.SetFlagsFromBinary(uint32(i))
+}
+
 func (i Add) String() string {
-	return fmt.Sprintf("ADD %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
+	return fmt.Sprintf("ADD%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Xm())
 }
 
 // ADDI instruction (ADD with immediate)
@@ -51,9 +57,11 @@ func ADDI(
 	Xd registers.GPorSPRegister,
 	Xn registers.GPorSPRegister,
 	imm immediates.Immediate12,
+	setFlags immediates.SetFlags,
 ) AddImm {
 	return AddImm(
 		0x91000000 |
+			(setFlags.Binary()) |
 			(imm.Binary() << 10) |
 			(Xn.Binary() << 5) |
 			(Xd.Binary()),
@@ -76,6 +84,10 @@ func (i AddImm) Imm() immediates.Immediate12 {
 	return immediates.Immediate12((i >> 10) & 0xFFF)
 }
 
+func (i AddImm) SetFlags() immediates.SetFlags {
+	return immediates.SetFlagsFromBinary(uint32(i))
+}
+
 func (i AddImm) String() string {
-	return fmt.Sprintf("ADD %s, %s, %s", i.Xd(), i.Xn(), i.Imm())
+	return fmt.Sprintf("ADD%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Imm())
 }
