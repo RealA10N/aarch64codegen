@@ -34,5 +34,5 @@ func (i Mul) Xm() registers.GPRegister {
 }
 
 func (i Mul) String() string {
-	return fmt.Sprintf("MUL %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
+	return fmt.Sprintf("mul %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
 }

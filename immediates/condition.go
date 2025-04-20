@@ -37,37 +37,37 @@ func (c Condition) Validate() error {
 func (c Condition) String() string {
 	switch c {
 	case ConditionEq:
-		return "EQ"
+		return "eq"
 	case ConditionNe:
-		return "NE"
+		return "ne"
 	case ConditionCs:
-		return "CS"
+		return "cs"
 	case ConditionCc:
-		return "CC"
+		return "cc"
 	case ConditionMi:
-		return "MI"
+		return "mi"
 	case ConditionPl:
-		return "PL"
+		return "pl"
 	case ConditionVs:
-		return "VS"
+		return "vs"
 	case ConditionVc:
-		return "VC"
+		return "vc"
 	case ConditionHi:
-		return "HI"
+		return "hi"
 	case ConditionLs:
-		return "LS"
+		return "ls"
 	case ConditionGe:
-		return "GE"
+		return "ge"
 	case ConditionLt:
-		return "LT"
+		return "lt"
 	case ConditionGt:
-		return "GT"
+		return "gt"
 	case ConditionLe:
-		return "LE"
+		return "le"
 	case ConditionAl:
-		return "AL"
+		return "al"
 	case ConditionNv:
-		return "NV"
+		return "nv"
 	default:
 		return "??"
 	}

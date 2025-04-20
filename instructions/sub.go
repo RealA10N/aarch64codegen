@@ -40,7 +40,7 @@ func (i Sub) Xm() registers.GPRegister {
 }
 
 func (i Sub) String() string {
-	return fmt.Sprintf("SUB %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
+	return fmt.Sprintf("sub %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
 }
 
 // SUBI instruction (SUB with immediate)
@@ -76,5 +76,5 @@ func (i SubImm) Imm() immediates.Immediate12 {
 }
 
 func (i SubImm) String() string {
-	return fmt.Sprintf("SUB %s, %s, %s", i.Xd(), i.Xn(), i.Imm())
+	return fmt.Sprintf("sub %s, %s, %s", i.Xd(), i.Xn(), i.Imm())
 }

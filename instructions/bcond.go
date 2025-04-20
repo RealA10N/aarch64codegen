@@ -25,7 +25,7 @@ func (i Bcond) Condition() immediates.Condition {
 }
 
 func (i Bcond) String() string {
-	return fmt.Sprintf("B.%s %s", i.Condition(), i.Offset())
+	return fmt.Sprintf("b.%s %s", i.Condition(), i.Offset())
 }
 
 func (i Bcond) Binary() uint32 {

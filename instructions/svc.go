@@ -21,5 +21,5 @@ func (i Svc) Imm() uint16 {
 }
 
 func (i Svc) String() string {
-	return fmt.Sprintf("SVC #%d", i.Imm())
+	return fmt.Sprintf("svc #%d", i.Imm())
 }

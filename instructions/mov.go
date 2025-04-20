@@ -33,7 +33,7 @@ func (m MovShift) Binary() uint32 {
 }
 
 func (m MovShift) String() string {
-	return fmt.Sprintf("LSL #%d", m*16)
+	return fmt.Sprintf("lsl #%d", m*16)
 }
 
 func movBuildRaw(magic uint32, Xd registers.GPRegister, imm immediates.Immediate16, shift MovShift) uint32 {
@@ -66,7 +66,7 @@ func MOVZ(Xd registers.GPRegister, imm immediates.Immediate16, shift MovShift) M
 
 func (m Movz) String() string {
 	_, Xd, imm, shift := movExtractDetails(uint32(m))
-	return movString("MOVZ", Xd, imm, shift)
+	return movString("movz", Xd, imm, shift)
 }
 
 func (m Movz) Binary() uint32 {
@@ -83,7 +83,7 @@ func MOVK(Xd registers.GPRegister, imm immediates.Immediate16, shift MovShift) M
 
 func (m Movk) String() string {
 	_, Xd, imm, shift := movExtractDetails(uint32(m))
-	return movString("MOVK", Xd, imm, shift)
+	return movString("movk", Xd, imm, shift)
 }
 
 func (m Movk) Binary() uint32 {
@@ -100,7 +100,7 @@ func MOVN(Xd registers.GPRegister, imm immediates.Immediate16, shift MovShift) M
 
 func (m Movn) String() string {
 	_, Xd, imm, shift := movExtractDetails(uint32(m))
-	return movString("MOVN", Xd, imm, shift)
+	return movString("movn", Xd, imm, shift)
 }
 
 func (m Movn) Binary() uint32 {

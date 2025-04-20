@@ -16,21 +16,21 @@ func AssertExpectedBranchInstruction(t *testing.T, expected string, offset int32
 }
 
 func TestBranch0(t *testing.T) {
-	AssertExpectedBranchInstruction(t, "B #0", 0)
+	AssertExpectedBranchInstruction(t, "b #0", 0)
 }
 
 func TestBranch1(t *testing.T) {
-	AssertExpectedBranchInstruction(t, "B #4", 4)
+	AssertExpectedBranchInstruction(t, "b #4", 4)
 }
 
 func TestBranchMinus1(t *testing.T) {
-	AssertExpectedBranchInstruction(t, "B #-4", -4)
+	AssertExpectedBranchInstruction(t, "b #-4", -4)
 }
 
 func TestBranchMax(t *testing.T) {
-	AssertExpectedBranchInstruction(t, "B #134217724", 0x7FFFFFC)
+	AssertExpectedBranchInstruction(t, "b #134217724", 0x7FFFFFC)
 }
 
 func TestBranchMin(t *testing.T) {
-	AssertExpectedBranchInstruction(t, "B #-134217728", -0x8000000)
+	AssertExpectedBranchInstruction(t, "b #-134217728", -0x8000000)
 }

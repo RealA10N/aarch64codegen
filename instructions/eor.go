@@ -52,7 +52,7 @@ func (i Eor) Shift() immediates.Shift6 {
 }
 
 func (i Eor) String() string {
-	s := fmt.Sprintf("EOR %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
+	s := fmt.Sprintf("eor %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
 	shift := i.Shift()
 	if shift.HasShift() {
 		s += fmt.Sprintf(", %s", shift)

@@ -33,7 +33,7 @@ func TestMovShiftValidateInvalid(t *testing.T) {
 }
 
 func TestMovz1(t *testing.T) {
-	AssertExpectedInstruction(t, "MOVZ X0, #1234, LSL #32", instructions.MOVZ(
+	AssertExpectedInstruction(t, "movz x0, #1234, lsl #32", instructions.MOVZ(
 		registers.GPRegisterX0,
 		immediates.Immediate16(1234),
 		instructions.MovShift32,
@@ -41,7 +41,7 @@ func TestMovz1(t *testing.T) {
 }
 
 func TestMovz2(t *testing.T) {
-	AssertExpectedInstruction(t, "MOVZ X30, #65535", instructions.MOVZ(
+	AssertExpectedInstruction(t, "movz x30, #65535", instructions.MOVZ(
 		registers.GPRegisterX30,
 		immediates.Immediate16(0xFFFF),
 		instructions.MovShift0,
@@ -50,7 +50,7 @@ func TestMovz2(t *testing.T) {
 
 func TestMovzXZR(t *testing.T) {
 	// Test MOVZ with XZR as destination
-	AssertExpectedInstruction(t, "MOVZ XZR, #1234", instructions.MOVZ(
+	AssertExpectedInstruction(t, "movz xzr, #1234", instructions.MOVZ(
 		registers.GPRegisterXZR,
 		immediates.Immediate16(1234),
 		instructions.MovShift0,
@@ -58,7 +58,7 @@ func TestMovzXZR(t *testing.T) {
 }
 
 func TestMovk1(t *testing.T) {
-	AssertExpectedInstruction(t, "MOVK X10, #0, LSL #48", instructions.MOVK(
+	AssertExpectedInstruction(t, "movk x10, #0, lsl #48", instructions.MOVK(
 		registers.GPRegisterX10,
 		immediates.Immediate16(0),
 		instructions.MovShift48,
@@ -66,7 +66,7 @@ func TestMovk1(t *testing.T) {
 }
 
 func TestMovk2(t *testing.T) {
-	AssertExpectedInstruction(t, "MOVK X29, #65534, LSL #16", instructions.MOVK(
+	AssertExpectedInstruction(t, "movk x29, #65534, lsl #16", instructions.MOVK(
 		registers.GPRegisterX29,
 		immediates.Immediate16(0xFFFE),
 		instructions.MovShift16,
@@ -75,7 +75,7 @@ func TestMovk2(t *testing.T) {
 
 func TestMovkXZR(t *testing.T) {
 	// Test MOVK with XZR as destination
-	AssertExpectedInstruction(t, "MOVK XZR, #4321", instructions.MOVK(
+	AssertExpectedInstruction(t, "movk xzr, #4321", instructions.MOVK(
 		registers.GPRegisterXZR,
 		immediates.Immediate16(4321),
 		instructions.MovShift0,
@@ -83,7 +83,7 @@ func TestMovkXZR(t *testing.T) {
 }
 
 func TestMovn1(t *testing.T) {
-	AssertExpectedInstruction(t, "MOVN X2, #48879, LSL #32", instructions.MOVN(
+	AssertExpectedInstruction(t, "movn x2, #48879, lsl #32", instructions.MOVN(
 		registers.GPRegisterX2,
 		immediates.Immediate16(0xBEEF),
 		instructions.MovShift32,
@@ -91,7 +91,7 @@ func TestMovn1(t *testing.T) {
 }
 
 func TestMovn2(t *testing.T) {
-	AssertExpectedInstruction(t, "MOVN X21, #0", instructions.MOVN(
+	AssertExpectedInstruction(t, "movn x21, #0", instructions.MOVN(
 		registers.GPRegisterX21,
 		immediates.Immediate16(0),
 		instructions.MovShift0,
@@ -100,7 +100,7 @@ func TestMovn2(t *testing.T) {
 
 func TestMovnXZR(t *testing.T) {
 	// Test MOVN with XZR as destination
-	AssertExpectedInstruction(t, "MOVN XZR, #5678", instructions.MOVN(
+	AssertExpectedInstruction(t, "movn xzr, #5678", instructions.MOVN(
 		registers.GPRegisterXZR,
 		immediates.Immediate16(5678),
 		instructions.MovShift0,

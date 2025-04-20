@@ -47,7 +47,7 @@ func (i Add) SetFlags() immediates.SetFlags {
 }
 
 func (i Add) String() string {
-	return fmt.Sprintf("ADD%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Xm())
+	return fmt.Sprintf("add%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Xm())
 }
 
 // ADDI instruction (ADD with immediate)
@@ -89,5 +89,5 @@ func (i AddImm) SetFlags() immediates.SetFlags {
 }
 
 func (i AddImm) String() string {
-	return fmt.Sprintf("ADD%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Imm())
+	return fmt.Sprintf("add%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Imm())
 }

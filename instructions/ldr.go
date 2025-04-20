@@ -39,7 +39,7 @@ func (i Ldr) Imm() immediates.Immediate9 {
 }
 
 func (i Ldr) String() string {
-	s := fmt.Sprintf("LDR %s, [%s]", i.Xt(), i.Xn())
+	s := fmt.Sprintf("ldr %s, [%s]", i.Xt(), i.Xn())
 	imm := i.Imm()
 	if imm != 0 {
 		s += ", " + imm.String()

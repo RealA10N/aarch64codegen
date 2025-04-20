@@ -16,21 +16,21 @@ func AssertExpectedBlInstruction(t *testing.T, expected string, offset int32) {
 }
 
 func TestBl0(t *testing.T) {
-	AssertExpectedBlInstruction(t, "BL #0", 0)
+	AssertExpectedBlInstruction(t, "bl #0", 0)
 }
 
 func TestBl1(t *testing.T) {
-	AssertExpectedBlInstruction(t, "BL #4", 4)
+	AssertExpectedBlInstruction(t, "bl #4", 4)
 }
 
 func TestBlMinus1(t *testing.T) {
-	AssertExpectedBlInstruction(t, "BL #-4", -4)
+	AssertExpectedBlInstruction(t, "bl #-4", -4)
 }
 
 func TestBlMax(t *testing.T) {
-	AssertExpectedBlInstruction(t, "BL #134217724", 0x7FFFFFC)
+	AssertExpectedBlInstruction(t, "bl #134217724", 0x7FFFFFC)
 }
 
 func TestBlMin(t *testing.T) {
-	AssertExpectedBlInstruction(t, "BL #-134217728", -0x8000000)
+	AssertExpectedBlInstruction(t, "bl #-134217728", -0x8000000)
 }

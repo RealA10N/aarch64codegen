@@ -52,7 +52,7 @@ func (i And) Shift() immediates.Shift6 {
 }
 
 func (i And) String() string {
-	s := fmt.Sprintf("AND %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
+	s := fmt.Sprintf("and %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
 	shift := i.Shift()
 	if shift.HasShift() {
 		s += fmt.Sprintf(", %s", shift)

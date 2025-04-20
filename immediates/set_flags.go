@@ -17,7 +17,7 @@ func (s SetFlags) Binary() uint32 {
 
 func (s SetFlags) String() string {
 	if s {
-		return "S"
+		return "s"
 	} else {
 		return ""
 	}

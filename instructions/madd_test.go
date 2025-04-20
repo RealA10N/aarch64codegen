@@ -9,7 +9,7 @@ import (
 
 func TestMadd(t *testing.T) {
 	// MADD X0, X1, X2, X3 (X0 = X3 + X1 * X2)
-	AssertExpectedInstruction(t, "MADD X0, X1, X2, X3", instructions.MADD(
+	AssertExpectedInstruction(t, "madd x0, x1, x2, x3", instructions.MADD(
 		registers.GPRegisterX0,
 		registers.GPRegisterX1,
 		registers.GPRegisterX2,
@@ -17,7 +17,7 @@ func TestMadd(t *testing.T) {
 	))
 
 	// MADD X20, X21, X22, X23
-	AssertExpectedInstruction(t, "MADD X20, X21, X22, X23", instructions.MADD(
+	AssertExpectedInstruction(t, "madd x20, x21, x22, x23", instructions.MADD(
 		registers.GPRegisterX20,
 		registers.GPRegisterX21,
 		registers.GPRegisterX22,
@@ -27,7 +27,7 @@ func TestMadd(t *testing.T) {
 
 func TestMaddWithXZR(t *testing.T) {
 	// XZR as destination (result is discarded)
-	AssertExpectedInstruction(t, "MADD XZR, X1, X2, X3", instructions.MADD(
+	AssertExpectedInstruction(t, "madd xzr, x1, x2, x3", instructions.MADD(
 		registers.GPRegisterXZR,
 		registers.GPRegisterX1,
 		registers.GPRegisterX2,
@@ -35,7 +35,7 @@ func TestMaddWithXZR(t *testing.T) {
 	))
 
 	// XZR as first multiplicand
-	AssertExpectedInstruction(t, "MADD X0, XZR, X2, X3", instructions.MADD(
+	AssertExpectedInstruction(t, "madd x0, xzr, x2, x3", instructions.MADD(
 		registers.GPRegisterX0,
 		registers.GPRegisterXZR,
 		registers.GPRegisterX2,
@@ -43,7 +43,7 @@ func TestMaddWithXZR(t *testing.T) {
 	))
 
 	// XZR as second multiplicand
-	AssertExpectedInstruction(t, "MADD X0, X1, XZR, X3", instructions.MADD(
+	AssertExpectedInstruction(t, "madd x0, x1, xzr, x3", instructions.MADD(
 		registers.GPRegisterX0,
 		registers.GPRegisterX1,
 		registers.GPRegisterXZR,
@@ -51,7 +51,7 @@ func TestMaddWithXZR(t *testing.T) {
 	))
 
 	// MADD with zero register (X0 = X1 * X2, i.e., MUL)
-	AssertExpectedInstruction(t, "MADD X0, X1, X2, XZR", instructions.MADD(
+	AssertExpectedInstruction(t, "madd x0, x1, x2, xzr", instructions.MADD(
 		registers.GPRegisterX0,
 		registers.GPRegisterX1,
 		registers.GPRegisterX2,
@@ -59,7 +59,7 @@ func TestMaddWithXZR(t *testing.T) {
 	))
 
 	// Multiple XZR registers
-	AssertExpectedInstruction(t, "MADD XZR, XZR, XZR, XZR", instructions.MADD(
+	AssertExpectedInstruction(t, "madd xzr, xzr, xzr, xzr", instructions.MADD(
 		registers.GPRegisterXZR,
 		registers.GPRegisterXZR,
 		registers.GPRegisterXZR,

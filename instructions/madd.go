@@ -45,5 +45,5 @@ func (i Madd) Xm() registers.GPRegister {
 }
 
 func (i Madd) String() string {
-	return fmt.Sprintf("MADD %s, %s, %s, %s", i.Xd(), i.Xn(), i.Xm(), i.Xa())
+	return fmt.Sprintf("madd %s, %s, %s, %s", i.Xd(), i.Xn(), i.Xm(), i.Xa())
 }

@@ -9,7 +9,7 @@ import (
 )
 
 func TestAnd(t *testing.T) {
-	AssertExpectedInstruction(t, "AND X9, X10, X11", instructions.AND(
+	AssertExpectedInstruction(t, "and x9, x10, x11", instructions.AND(
 		registers.GPRegisterX9,
 		registers.GPRegisterX10,
 		registers.GPRegisterX11,
@@ -18,28 +18,28 @@ func TestAnd(t *testing.T) {
 }
 
 func TestAndWithXZR(t *testing.T) {
-	AssertExpectedInstruction(t, "AND XZR, X10, X11", instructions.AND(
+	AssertExpectedInstruction(t, "and xzr, x10, x11", instructions.AND(
 		registers.GPRegisterXZR,
 		registers.GPRegisterX10,
 		registers.GPRegisterX11,
 		immediates.NoShift6(),
 	))
 
-	AssertExpectedInstruction(t, "AND X9, XZR, X11", instructions.AND(
+	AssertExpectedInstruction(t, "and x9, xzr, x11", instructions.AND(
 		registers.GPRegisterX9,
 		registers.GPRegisterXZR,
 		registers.GPRegisterX11,
 		immediates.NoShift6(),
 	))
 
-	AssertExpectedInstruction(t, "AND X9, X10, XZR", instructions.AND(
+	AssertExpectedInstruction(t, "and x9, x10, xzr", instructions.AND(
 		registers.GPRegisterX9,
 		registers.GPRegisterX10,
 		registers.GPRegisterXZR,
 		immediates.NoShift6(),
 	))
 
-	AssertExpectedInstruction(t, "AND XZR, XZR, XZR", instructions.AND(
+	AssertExpectedInstruction(t, "and xzr, xzr, xzr", instructions.AND(
 		registers.GPRegisterXZR,
 		registers.GPRegisterXZR,
 		registers.GPRegisterXZR,
@@ -49,7 +49,7 @@ func TestAndWithXZR(t *testing.T) {
 
 func TestAndWithShift(t *testing.T) {
 	// Test LSL shift
-	AssertExpectedInstruction(t, "AND X9, X10, X11, LSL #2", instructions.AND(
+	AssertExpectedInstruction(t, "and x9, x10, x11, lsl #2", instructions.AND(
 		registers.GPRegisterX9,
 		registers.GPRegisterX10,
 		registers.GPRegisterX11,
@@ -57,7 +57,7 @@ func TestAndWithShift(t *testing.T) {
 	))
 
 	// Test LSR shift
-	AssertExpectedInstruction(t, "AND X9, X10, X11, LSR #4", instructions.AND(
+	AssertExpectedInstruction(t, "and x9, x10, x11, lsr #4", instructions.AND(
 		registers.GPRegisterX9,
 		registers.GPRegisterX10,
 		registers.GPRegisterX11,
@@ -65,7 +65,7 @@ func TestAndWithShift(t *testing.T) {
 	))
 
 	// Test ASR shift
-	AssertExpectedInstruction(t, "AND X9, X10, X11, ASR #63", instructions.AND(
+	AssertExpectedInstruction(t, "and x9, x10, x11, asr #63", instructions.AND(
 		registers.GPRegisterX9,
 		registers.GPRegisterX10,
 		registers.GPRegisterX11,
@@ -73,7 +73,7 @@ func TestAndWithShift(t *testing.T) {
 	))
 
 	// Test ROR shift
-	AssertExpectedInstruction(t, "AND X9, X10, X11, ROR #8", instructions.AND(
+	AssertExpectedInstruction(t, "and x9, x10, x11, ror #8", instructions.AND(
 		registers.GPRegisterX9,
 		registers.GPRegisterX10,
 		registers.GPRegisterX11,
@@ -83,7 +83,7 @@ func TestAndWithShift(t *testing.T) {
 
 func TestAndWithShiftAndXZR(t *testing.T) {
 	// Test with XZR as destination and shifted operand
-	AssertExpectedInstruction(t, "AND XZR, X10, X11, LSL #2", instructions.AND(
+	AssertExpectedInstruction(t, "and xzr, x10, x11, lsl #2", instructions.AND(
 		registers.GPRegisterXZR,
 		registers.GPRegisterX10,
 		registers.GPRegisterX11,
@@ -91,7 +91,7 @@ func TestAndWithShiftAndXZR(t *testing.T) {
 	))
 
 	// Test with XZR as first source and shifted operand
-	AssertExpectedInstruction(t, "AND X9, XZR, X11, LSR #4", instructions.AND(
+	AssertExpectedInstruction(t, "and x9, xzr, x11, lsr #4", instructions.AND(
 		registers.GPRegisterX9,
 		registers.GPRegisterXZR,
 		registers.GPRegisterX11,
@@ -99,7 +99,7 @@ func TestAndWithShiftAndXZR(t *testing.T) {
 	))
 
 	// Test with XZR as second source and shift
-	AssertExpectedInstruction(t, "AND X9, X10, XZR, ASR #1", instructions.AND(
+	AssertExpectedInstruction(t, "and x9, x10, xzr, asr #1", instructions.AND(
 		registers.GPRegisterX9,
 		registers.GPRegisterX10,
 		registers.GPRegisterXZR,

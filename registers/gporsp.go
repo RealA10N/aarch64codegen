@@ -52,7 +52,7 @@ func (r GPorSPRegister) Binary() uint32 {
 
 func (r GPorSPRegister) String() string {
 	if r == GPorSPRegisterSP {
-		return "SP"
+		return "sp"
 	}
-	return fmt.Sprintf("X%d", r)
+	return fmt.Sprintf("x%d", r)
 }

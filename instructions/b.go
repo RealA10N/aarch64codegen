@@ -17,7 +17,7 @@ func (i Branch) Offset() immediates.Offset26Align4 {
 }
 
 func (i Branch) String() string {
-	return fmt.Sprintf("B %s", i.Offset())
+	return fmt.Sprintf("b %s", i.Offset())
 }
 
 func (i Branch) Binary() uint32 {

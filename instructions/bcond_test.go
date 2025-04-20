@@ -21,23 +21,23 @@ func AssertExpectedBcondInstruction(
 }
 
 func TestBcond0(t *testing.T) {
-	AssertExpectedBcondInstruction(t, "B.EQ #0", immediates.ConditionEq, 0)
+	AssertExpectedBcondInstruction(t, "b.eq #0", immediates.ConditionEq, 0)
 }
 
 func TestBcond1(t *testing.T) {
-	AssertExpectedBcondInstruction(t, "B.EQ #4", immediates.ConditionEq, 4)
+	AssertExpectedBcondInstruction(t, "b.eq #4", immediates.ConditionEq, 4)
 }
 
 func TestBcondMinus1(t *testing.T) {
-	AssertExpectedBcondInstruction(t, "B.EQ #-4", immediates.ConditionEq, -4)
+	AssertExpectedBcondInstruction(t, "b.eq #-4", immediates.ConditionEq, -4)
 }
 
 func TestBcondMax(t *testing.T) {
-	AssertExpectedBcondInstruction(t, "B.EQ #1048572", immediates.ConditionEq, 0xFFFFC)
+	AssertExpectedBcondInstruction(t, "b.eq #1048572", immediates.ConditionEq, 0xFFFFC)
 }
 
 func TestBcondMin(t *testing.T) {
-	AssertExpectedBcondInstruction(t, "B.EQ #-1048576", immediates.ConditionEq, -0x100000)
+	AssertExpectedBcondInstruction(t, "b.eq #-1048576", immediates.ConditionEq, -0x100000)
 }
 
 func TestBcondAllConditions(t *testing.T) {
@@ -57,6 +57,6 @@ func TestBcondAllConditions(t *testing.T) {
 		immediates.ConditionGt,
 		immediates.ConditionLe,
 	} {
-		AssertExpectedBcondInstruction(t, "B."+cond.String()+" #0", cond, 0)
+		AssertExpectedBcondInstruction(t, "b."+cond.String()+" #0", cond, 0)
 	}
 }

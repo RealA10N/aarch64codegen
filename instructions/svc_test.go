@@ -8,11 +8,11 @@ import (
 
 func TestSvc(t *testing.T) {
 	// SVC #0 (typically used for Linux system calls)
-	AssertExpectedInstruction(t, "SVC #0", instructions.SVC(0))
+	AssertExpectedInstruction(t, "svc #0", instructions.SVC(0))
 
 	// SVC #1 (often used for system calls in other OS'es)
-	AssertExpectedInstruction(t, "SVC #1", instructions.SVC(1))
+	AssertExpectedInstruction(t, "svc #1", instructions.SVC(1))
 
 	// SVC with larger immediate value
-	AssertExpectedInstruction(t, "SVC #65535", instructions.SVC(65535))
+	AssertExpectedInstruction(t, "svc #65535", instructions.SVC(65535))
 }

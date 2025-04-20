@@ -13,13 +13,13 @@ const (
 func (s ShiftType) String() string {
 	switch s {
 	case LSL:
-		return "LSL"
+		return "lsl"
 	case LSR:
-		return "LSR"
+		return "lsr"
 	case ASR:
-		return "ASR"
+		return "asr"
 	case ROR:
-		return "ROR"
+		return "ror"
 	default:
 		return "???"
 	}

@@ -52,7 +52,7 @@ func (r GPRegister) Binary() uint32 {
 
 func (r GPRegister) String() string {
 	if r == GPRegisterXZR {
-		return "XZR"
+		return "xzr"
 	}
-	return fmt.Sprintf("X%d", r)
+	return fmt.Sprintf("x%d", r)
 }

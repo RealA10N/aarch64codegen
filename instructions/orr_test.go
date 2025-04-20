@@ -9,14 +9,14 @@ import (
 )
 
 func TestOrr(t *testing.T) {
-	AssertExpectedInstruction(t, "ORR X12, X13, X14", instructions.ORR(
+	AssertExpectedInstruction(t, "orr x12, x13, x14", instructions.ORR(
 		registers.GPRegisterX12,
 		registers.GPRegisterX13,
 		registers.GPRegisterX14,
 		immediates.NoShift6(),
 	))
 
-	AssertExpectedInstruction(t, "ORR X18, X19, X20", instructions.ORR(
+	AssertExpectedInstruction(t, "orr x18, x19, x20", instructions.ORR(
 		registers.GPRegisterX18,
 		registers.GPRegisterX19,
 		registers.GPRegisterX20,
@@ -26,7 +26,7 @@ func TestOrr(t *testing.T) {
 
 func TestOrrWithXZR(t *testing.T) {
 	// Test ORR with XZR as destination
-	AssertExpectedInstruction(t, "ORR XZR, X13, X14", instructions.ORR(
+	AssertExpectedInstruction(t, "orr xzr, x13, x14", instructions.ORR(
 		registers.GPRegisterXZR,
 		registers.GPRegisterX13,
 		registers.GPRegisterX14,
@@ -34,7 +34,7 @@ func TestOrrWithXZR(t *testing.T) {
 	))
 
 	// Test ORR with XZR as first source
-	AssertExpectedInstruction(t, "ORR X12, XZR, X14", instructions.ORR(
+	AssertExpectedInstruction(t, "orr x12, xzr, x14", instructions.ORR(
 		registers.GPRegisterX12,
 		registers.GPRegisterXZR,
 		registers.GPRegisterX14,
@@ -42,7 +42,7 @@ func TestOrrWithXZR(t *testing.T) {
 	))
 
 	// Test ORR with XZR as second source
-	AssertExpectedInstruction(t, "ORR X12, X13, XZR", instructions.ORR(
+	AssertExpectedInstruction(t, "orr x12, x13, xzr", instructions.ORR(
 		registers.GPRegisterX12,
 		registers.GPRegisterX13,
 		registers.GPRegisterXZR,
@@ -52,7 +52,7 @@ func TestOrrWithXZR(t *testing.T) {
 
 func TestOrrWithShift(t *testing.T) {
 	// Test LSL shift
-	AssertExpectedInstruction(t, "ORR X12, X13, X14, LSL #1", instructions.ORR(
+	AssertExpectedInstruction(t, "orr x12, x13, x14, lsl #1", instructions.ORR(
 		registers.GPRegisterX12,
 		registers.GPRegisterX13,
 		registers.GPRegisterX14,
@@ -60,7 +60,7 @@ func TestOrrWithShift(t *testing.T) {
 	))
 
 	// Test LSR shift
-	AssertExpectedInstruction(t, "ORR X12, X13, X14, LSR #32", instructions.ORR(
+	AssertExpectedInstruction(t, "orr x12, x13, x14, lsr #32", instructions.ORR(
 		registers.GPRegisterX12,
 		registers.GPRegisterX13,
 		registers.GPRegisterX14,
@@ -68,7 +68,7 @@ func TestOrrWithShift(t *testing.T) {
 	))
 
 	// Test ASR shift
-	AssertExpectedInstruction(t, "ORR X12, X13, X14, ASR #48", instructions.ORR(
+	AssertExpectedInstruction(t, "orr x12, x13, x14, asr #48", instructions.ORR(
 		registers.GPRegisterX12,
 		registers.GPRegisterX13,
 		registers.GPRegisterX14,
@@ -76,7 +76,7 @@ func TestOrrWithShift(t *testing.T) {
 	))
 
 	// Test ROR shift
-	AssertExpectedInstruction(t, "ORR X12, X13, X14, ROR #16", instructions.ORR(
+	AssertExpectedInstruction(t, "orr x12, x13, x14, ror #16", instructions.ORR(
 		registers.GPRegisterX12,
 		registers.GPRegisterX13,
 		registers.GPRegisterX14,
@@ -86,7 +86,7 @@ func TestOrrWithShift(t *testing.T) {
 
 func TestOrrWithShiftAndXZR(t *testing.T) {
 	// Test with XZR as destination and shifted operand
-	AssertExpectedInstruction(t, "ORR XZR, X13, X14, LSL #2", instructions.ORR(
+	AssertExpectedInstruction(t, "orr xzr, x13, x14, lsl #2", instructions.ORR(
 		registers.GPRegisterXZR,
 		registers.GPRegisterX13,
 		registers.GPRegisterX14,
@@ -94,7 +94,7 @@ func TestOrrWithShiftAndXZR(t *testing.T) {
 	))
 
 	// Test with XZR as first source and shifted operand
-	AssertExpectedInstruction(t, "ORR X12, XZR, X14, LSR #3", instructions.ORR(
+	AssertExpectedInstruction(t, "orr x12, xzr, x14, lsr #3", instructions.ORR(
 		registers.GPRegisterX12,
 		registers.GPRegisterXZR,
 		registers.GPRegisterX14,
@@ -102,7 +102,7 @@ func TestOrrWithShiftAndXZR(t *testing.T) {
 	))
 
 	// Test with XZR as second source and shift
-	AssertExpectedInstruction(t, "ORR X12, X13, XZR, ASR #4", instructions.ORR(
+	AssertExpectedInstruction(t, "orr x12, x13, xzr, asr #4", instructions.ORR(
 		registers.GPRegisterX12,
 		registers.GPRegisterX13,
 		registers.GPRegisterXZR,

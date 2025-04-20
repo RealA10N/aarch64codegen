@@ -8,17 +8,17 @@ import (
 )
 
 func TestRet1(t *testing.T) {
-	AssertExpectedInstruction(t, "RET", instructions.RET(registers.GPRegisterX30))
+	AssertExpectedInstruction(t, "ret", instructions.RET(registers.GPRegisterX30))
 }
 
 func TestRet2(t *testing.T) {
-	AssertExpectedInstruction(t, "RET X0", instructions.RET(registers.GPRegisterX0))
+	AssertExpectedInstruction(t, "ret x0", instructions.RET(registers.GPRegisterX0))
 }
 
 func TestRet3(t *testing.T) {
-	AssertExpectedInstruction(t, "RET X29", instructions.RET(registers.GPRegisterX29))
+	AssertExpectedInstruction(t, "ret x29", instructions.RET(registers.GPRegisterX29))
 }
 
 func TestRetWithXZR(t *testing.T) {
-	AssertExpectedInstruction(t, "RET XZR", instructions.RET(registers.GPRegisterXZR))
+	AssertExpectedInstruction(t, "ret xzr", instructions.RET(registers.GPRegisterXZR))
 }
