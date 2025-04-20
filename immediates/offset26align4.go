@@ -2,10 +2,6 @@ package immediates
 
 import "fmt"
 
-// Offset types are signed, in contrast to immediate types which are unsigned.
-// The invariant that is maintained is that the lower N bits are always represent
-// the offset in it's unsigned form.
-
 type Offset26Align4 int32
 
 func NewOffset26Align4(offset int32) (Offset26Align4, error) {
@@ -26,7 +22,7 @@ func (o Offset26Align4) Binary() uint32 {
 }
 
 func (o Offset26Align4) Signed() int32 {
-	return int32(o.Binary()) << 6 >> 6
+	return (int32(o.Binary()) << 6) >> 6
 }
 
 func (o Offset26Align4) String() string {
