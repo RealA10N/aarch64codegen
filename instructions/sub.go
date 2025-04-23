@@ -8,14 +8,14 @@ import (
 )
 
 // SUB instruction with register operands
-type Sub uint32
+type SubShiftedRegister uint32
 
 func NewSubShiftedRegister(
 	Xd registers.GPRegister,
 	Xn registers.GPRegister,
 	Xm registers.GPRegister,
-) Sub {
-	return Sub(
+) SubShiftedRegister {
+	return SubShiftedRegister(
 		0xCB000000 |
 			(Xm.Binary() << 16) |
 			(Xn.Binary() << 5) |
@@ -27,31 +27,31 @@ func NewSubsShiftedRegister(
 	Xd registers.GPRegister,
 	Xn registers.GPRegister,
 	Xm registers.GPRegister,
-) Sub {
+) SubShiftedRegister {
 	return NewSubShiftedRegister(Xd, Xn, Xm) | (1 << 29)
 }
 
-func (i Sub) Binary() uint32 {
+func (i SubShiftedRegister) Binary() uint32 {
 	return uint32(i)
 }
 
-func (i Sub) Xd() registers.GPRegister {
+func (i SubShiftedRegister) Xd() registers.GPRegister {
 	return registers.GPRegister(i & 0x1F)
 }
 
-func (i Sub) Xn() registers.GPRegister {
+func (i SubShiftedRegister) Xn() registers.GPRegister {
 	return registers.GPRegister((i >> 5) & 0x1F)
 }
 
-func (i Sub) Xm() registers.GPRegister {
+func (i SubShiftedRegister) Xm() registers.GPRegister {
 	return registers.GPRegister((i >> 16) & 0x1F)
 }
 
-func (i Sub) SetFlags() immediates.SetFlags {
+func (i SubShiftedRegister) SetFlags() immediates.SetFlags {
 	return immediates.SetFlagsFromBinary(uint32(i))
 }
 
-func (i Sub) String() string {
+func (i SubShiftedRegister) String() string {
 	return fmt.Sprintf("sub%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Xm())
 }
 
