@@ -10,17 +10,27 @@ import (
 // SUB instruction with register operands
 type SubShiftedRegister uint32
 
+func NewSubOrSubsShiftedRegister(
+	Xd registers.GPRegister,
+	Xn registers.GPRegister,
+	Xm registers.GPRegister,
+	setFlags immediates.SetFlags,
+) SubShiftedRegister {
+	return SubShiftedRegister(
+		0xCB000000 |
+			(setFlags.Binary() << 29) |
+			(Xm.Binary() << 16) |
+			(Xn.Binary() << 5) |
+			(Xd.Binary()),
+	)
+}
+
 func NewSubShiftedRegister(
 	Xd registers.GPRegister,
 	Xn registers.GPRegister,
 	Xm registers.GPRegister,
 ) SubShiftedRegister {
-	return SubShiftedRegister(
-		0xCB000000 |
-			(Xm.Binary() << 16) |
-			(Xn.Binary() << 5) |
-			(Xd.Binary()),
-	)
+	return NewSubOrSubsShiftedRegister(Xd, Xn, Xm, immediates.DoNotSetFlags)
 }
 
 func NewSubsShiftedRegister(
@@ -28,7 +38,7 @@ func NewSubsShiftedRegister(
 	Xn registers.GPRegister,
 	Xm registers.GPRegister,
 ) SubShiftedRegister {
-	return NewSubShiftedRegister(Xd, Xn, Xm) | (1 << 29)
+	return NewSubOrSubsShiftedRegister(Xd, Xn, Xm, immediates.DoSetFlags)
 }
 
 func (i SubShiftedRegister) Binary() uint32 {
@@ -57,17 +67,27 @@ func (i SubShiftedRegister) String() string {
 
 type SubImmediate uint32
 
+func NewSubOrSubsImmediate(
+	Xd registers.GPRegister,
+	Xn registers.GPorSPRegister,
+	imm immediates.Immediate12,
+	setFlags immediates.SetFlags,
+) SubImmediate {
+	return SubImmediate(
+		0xD1000000 |
+			(setFlags.Binary() << 29) |
+			(imm.Binary() << 10) |
+			(Xn.Binary() << 5) |
+			(Xd.Binary()),
+	)
+}
+
 func NewSubImmediate(
 	Xd registers.GPRegister,
 	Xn registers.GPorSPRegister,
 	imm immediates.Immediate12,
 ) SubImmediate {
-	return SubImmediate(
-		0xD1000000 |
-			(imm.Binary() << 10) |
-			(Xn.Binary() << 5) |
-			(Xd.Binary()),
-	)
+	return NewSubOrSubsImmediate(Xd, Xn, imm, immediates.DoNotSetFlags)
 }
 
 func NewSubsImmediate(
@@ -75,7 +95,7 @@ func NewSubsImmediate(
 	Xn registers.GPorSPRegister,
 	imm immediates.Immediate12,
 ) SubImmediate {
-	return NewSubImmediate(Xd, Xn, imm) | (1 << 29)
+	return NewSubOrSubsImmediate(Xd, Xn, imm, immediates.DoSetFlags)
 }
 
 func (i SubImmediate) Binary() uint32 {

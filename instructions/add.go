@@ -9,17 +9,27 @@ import (
 
 type AddShiftedRegister uint32
 
+func NewAddOrAddsShiftedRegister(
+	Xd registers.GPRegister,
+	Xn registers.GPRegister,
+	Xm registers.GPRegister,
+	setFlags immediates.SetFlags,
+) AddShiftedRegister {
+	return AddShiftedRegister(
+		0x8B000000 |
+			(setFlags.Binary() << 29) |
+			(Xm.Binary() << 16) |
+			(Xn.Binary() << 5) |
+			(Xd.Binary()),
+	)
+}
+
 func NewAddShiftedRegister(
 	Xd registers.GPRegister,
 	Xn registers.GPRegister,
 	Xm registers.GPRegister,
 ) AddShiftedRegister {
-	return AddShiftedRegister(
-		0x8B000000 |
-			(Xm.Binary() << 16) |
-			(Xn.Binary() << 5) |
-			(Xd.Binary()),
-	)
+	return NewAddOrAddsShiftedRegister(Xd, Xn, Xm, immediates.DoNotSetFlags)
 }
 
 func NewAddsShiftedRegister(
@@ -27,7 +37,7 @@ func NewAddsShiftedRegister(
 	Xn registers.GPRegister,
 	Xm registers.GPRegister,
 ) AddShiftedRegister {
-	return NewAddShiftedRegister(Xd, Xn, Xm) | (1 << 29)
+	return NewAddOrAddsShiftedRegister(Xd, Xn, Xm, immediates.DoSetFlags)
 }
 
 func (i AddShiftedRegister) Binary() uint32 {
