@@ -9,7 +9,7 @@ const (
 
 func (s SetFlags) Binary() uint32 {
 	if s {
-		return 1 << 29
+		return 1
 	} else {
 		return 0
 	}

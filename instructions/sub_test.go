@@ -14,6 +14,7 @@ func TestSub(t *testing.T) {
 		registers.GPRegisterX3,
 		registers.GPRegisterX4,
 		registers.GPRegisterX5,
+		immediates.DoNotSetFlags,
 	))
 
 	// SUB X27, X26, X25
@@ -21,6 +22,7 @@ func TestSub(t *testing.T) {
 		registers.GPRegisterX27,
 		registers.GPRegisterX26,
 		registers.GPRegisterX25,
+		immediates.DoNotSetFlags,
 	))
 }
 
@@ -30,6 +32,7 @@ func TestSubWithXZR(t *testing.T) {
 		registers.GPRegisterXZR,
 		registers.GPRegisterX4,
 		registers.GPRegisterX5,
+		immediates.DoNotSetFlags,
 	))
 
 	// Test SUB with XZR as first source
@@ -37,6 +40,7 @@ func TestSubWithXZR(t *testing.T) {
 		registers.GPRegisterX3,
 		registers.GPRegisterXZR,
 		registers.GPRegisterX5,
+		immediates.DoNotSetFlags,
 	))
 
 	// Test SUB with XZR as second source
@@ -44,6 +48,7 @@ func TestSubWithXZR(t *testing.T) {
 		registers.GPRegisterX3,
 		registers.GPRegisterX4,
 		registers.GPRegisterXZR,
+		immediates.DoNotSetFlags,
 	))
 
 	// Multiple XZR registers
@@ -51,6 +56,7 @@ func TestSubWithXZR(t *testing.T) {
 		registers.GPRegisterXZR,
 		registers.GPRegisterXZR,
 		registers.GPRegisterXZR,
+		immediates.DoNotSetFlags,
 	))
 }
 
@@ -67,5 +73,21 @@ func TestSubImm(t *testing.T) {
 		registers.GPRegisterX20,
 		registers.GPorSPRegisterSP,
 		immediates.Immediate12(1000),
+	))
+}
+
+func TestSubDoSetFlags(t *testing.T) {
+	AssertExpectedInstruction(t, "subs x0, x1, x2", instructions.SUB(
+		registers.GPRegisterX0,
+		registers.GPRegisterX1,
+		registers.GPRegisterX2,
+		immediates.DoSetFlags,
+	))
+
+	AssertExpectedInstruction(t, "subs xzr, x30, x29", instructions.SUB(
+		registers.GPRegisterXZR,
+		registers.GPRegisterX30,
+		registers.GPRegisterX29,
+		immediates.DoSetFlags,
 	))
 }

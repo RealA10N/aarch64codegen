@@ -19,7 +19,7 @@ func ADD(
 ) Add {
 	return Add(
 		0x8B000000 |
-			(setFlags.Binary()) |
+			(setFlags.Binary() << 29) |
 			(Xm.Binary() << 16) |
 			(Xn.Binary() << 5) |
 			(Xd.Binary()),

@@ -14,9 +14,11 @@ func SUB(
 	Xd registers.GPRegister,
 	Xn registers.GPRegister,
 	Xm registers.GPRegister,
+	setFlags immediates.SetFlags,
 ) Sub {
 	return Sub(
 		0xCB000000 |
+			(setFlags.Binary() << 29) |
 			(Xm.Binary() << 16) |
 			(Xn.Binary() << 5) |
 			(Xd.Binary()),
@@ -39,8 +41,12 @@ func (i Sub) Xm() registers.GPRegister {
 	return registers.GPRegister((i >> 16) & 0x1F)
 }
 
+func (i Sub) SetFlags() immediates.SetFlags {
+	return immediates.SetFlagsFromBinary(uint32(i))
+}
+
 func (i Sub) String() string {
-	return fmt.Sprintf("sub %s, %s, %s", i.Xd(), i.Xn(), i.Xm())
+	return fmt.Sprintf("sub%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Xm())
 }
 
 // SUBI instruction (SUB with immediate)
