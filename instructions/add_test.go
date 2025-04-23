@@ -85,3 +85,19 @@ func TestAddDoSetFlags(t *testing.T) {
 		immediates.DoSetFlags,
 	))
 }
+
+func TestAddImmDoSetFlags(t *testing.T) {
+	AssertExpectedInstruction(t, "adds x0, x1, #42", instructions.ADDI(
+		registers.GPorSPRegisterX0,
+		registers.GPorSPRegisterX1,
+		immediates.Immediate12(42),
+		immediates.DoSetFlags,
+	))
+
+	AssertExpectedInstruction(t, "adds sp, sp, #4095", instructions.ADDI(
+		registers.GPorSPRegisterSP,
+		registers.GPorSPRegisterSP,
+		immediates.Immediate12(4095),
+		immediates.DoSetFlags,
+	))
+}

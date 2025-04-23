@@ -61,7 +61,7 @@ func ADDI(
 ) AddImm {
 	return AddImm(
 		0x91000000 |
-			(setFlags.Binary()) |
+			(setFlags.Binary() << 29) |
 			(imm.Binary() << 10) |
 			(Xn.Binary() << 5) |
 			(Xd.Binary()),

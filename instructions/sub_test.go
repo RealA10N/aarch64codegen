@@ -66,6 +66,7 @@ func TestSubImm(t *testing.T) {
 		registers.GPRegisterX3,
 		registers.GPorSPRegisterX4,
 		immediates.Immediate12(10),
+		immediates.DoNotSetFlags,
 	))
 
 	// SUB X20, SP, #1000
@@ -73,6 +74,7 @@ func TestSubImm(t *testing.T) {
 		registers.GPRegisterX20,
 		registers.GPorSPRegisterSP,
 		immediates.Immediate12(1000),
+		immediates.DoNotSetFlags,
 	))
 }
 
@@ -88,6 +90,22 @@ func TestSubDoSetFlags(t *testing.T) {
 		registers.GPRegisterXZR,
 		registers.GPRegisterX30,
 		registers.GPRegisterX29,
+		immediates.DoSetFlags,
+	))
+}
+
+func TestSubImmDoSetFlags(t *testing.T) {
+	AssertExpectedInstruction(t, "subs x0, x1, #10", instructions.SUBI(
+		registers.GPRegisterX0,
+		registers.GPorSPRegisterX1,
+		immediates.Immediate12(10),
+		immediates.DoSetFlags,
+	))
+
+	AssertExpectedInstruction(t, "subs xzr, sp, #1000", instructions.SUBI(
+		registers.GPRegisterXZR,
+		registers.GPorSPRegisterSP,
+		immediates.Immediate12(1000),
 		immediates.DoSetFlags,
 	))
 }

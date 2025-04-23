@@ -56,9 +56,11 @@ func SUBI(
 	Xd registers.GPRegister,
 	Xn registers.GPorSPRegister,
 	imm immediates.Immediate12,
+	setFlags immediates.SetFlags,
 ) SubImm {
 	return SubImm(
 		0xD1000000 |
+			(setFlags.Binary() << 29) |
 			(imm.Binary() << 10) |
 			(Xn.Binary() << 5) |
 			(Xd.Binary()),
@@ -81,6 +83,10 @@ func (i SubImm) Imm() immediates.Immediate12 {
 	return immediates.Immediate12((i >> 10) & 0xFFF)
 }
 
+func (i SubImm) SetFlags() immediates.SetFlags {
+	return immediates.SetFlagsFromBinary(uint32(i))
+}
+
 func (i SubImm) String() string {
-	return fmt.Sprintf("sub %s, %s, %s", i.Xd(), i.Xn(), i.Imm())
+	return fmt.Sprintf("sub%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Imm())
 }
