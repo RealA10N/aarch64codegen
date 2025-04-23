@@ -9,95 +9,83 @@ import (
 )
 
 func TestAdd(t *testing.T) {
-	AssertExpectedInstruction(t, "add x0, x1, x2", instructions.ADD(
+	AssertExpectedInstruction(t, "add x0, x1, x2", instructions.NewAddShiftedRegister(
 		registers.GPRegisterX0,
 		registers.GPRegisterX1,
 		registers.GPRegisterX2,
-		immediates.DoNotSetFlags,
 	))
 
-	AssertExpectedInstruction(t, "add x30, x29, x28", instructions.ADD(
+	AssertExpectedInstruction(t, "add x30, x29, x28", instructions.NewAddShiftedRegister(
 		registers.GPRegisterX30,
 		registers.GPRegisterX29,
 		registers.GPRegisterX28,
-		immediates.DoNotSetFlags,
 	))
 
 }
 func TestAddWithXZR(t *testing.T) {
-	AssertExpectedInstruction(t, "add xzr, x1, x2", instructions.ADD(
+	AssertExpectedInstruction(t, "add xzr, x1, x2", instructions.NewAddShiftedRegister(
 		registers.GPRegisterXZR,
 		registers.GPRegisterX1,
 		registers.GPRegisterX2,
-		immediates.DoNotSetFlags,
 	))
 
-	AssertExpectedInstruction(t, "add x0, xzr, x2", instructions.ADD(
+	AssertExpectedInstruction(t, "add x0, xzr, x2", instructions.NewAddShiftedRegister(
 		registers.GPRegisterX0,
 		registers.GPRegisterXZR,
 		registers.GPRegisterX2,
-		immediates.DoNotSetFlags,
 	))
 
-	AssertExpectedInstruction(t, "add x0, x1, xzr", instructions.ADD(
+	AssertExpectedInstruction(t, "add x0, x1, xzr", instructions.NewAddShiftedRegister(
 		registers.GPRegisterX0,
 		registers.GPRegisterX1,
 		registers.GPRegisterXZR,
-		immediates.DoNotSetFlags,
 	))
 
-	AssertExpectedInstruction(t, "add xzr, xzr, xzr", instructions.ADD(
+	AssertExpectedInstruction(t, "add xzr, xzr, xzr", instructions.NewAddShiftedRegister(
 		registers.GPRegisterXZR,
 		registers.GPRegisterXZR,
 		registers.GPRegisterXZR,
-		immediates.DoNotSetFlags,
 	))
 }
 
-func TestAddImm(t *testing.T) {
-	AssertExpectedInstruction(t, "add x0, x1, #42", instructions.ADDI(
+func TestAddImmediate(t *testing.T) {
+	AssertExpectedInstruction(t, "add x0, x1, #42", instructions.NewAddImmediate(
 		registers.GPorSPRegisterX0,
 		registers.GPorSPRegisterX1,
 		immediates.Immediate12(42),
-		immediates.DoNotSetFlags,
 	))
 
-	AssertExpectedInstruction(t, "add sp, sp, #4095", instructions.ADDI(
+	AssertExpectedInstruction(t, "add sp, sp, #4095", instructions.NewAddImmediate(
 		registers.GPorSPRegisterSP,
 		registers.GPorSPRegisterSP,
 		immediates.Immediate12(4095),
-		immediates.DoNotSetFlags,
 	))
 }
 
-func TestAddDoSetFlags(t *testing.T) {
-	AssertExpectedInstruction(t, "adds x0, x1, x2", instructions.ADD(
+func TestAdds(t *testing.T) {
+	AssertExpectedInstruction(t, "adds x0, x1, x2", instructions.NewAddsShiftedRegister(
 		registers.GPRegisterX0,
 		registers.GPRegisterX1,
 		registers.GPRegisterX2,
-		immediates.DoSetFlags,
 	))
 
-	AssertExpectedInstruction(t, "adds x30, x29, x28", instructions.ADD(
+	AssertExpectedInstruction(t, "adds x30, x29, x28", instructions.NewAddsShiftedRegister(
 		registers.GPRegisterX30,
 		registers.GPRegisterX29,
 		registers.GPRegisterX28,
-		immediates.DoSetFlags,
 	))
 }
 
-func TestAddImmDoSetFlags(t *testing.T) {
-	AssertExpectedInstruction(t, "adds x0, x1, #42", instructions.ADDI(
-		registers.GPorSPRegisterX0,
+func TestAddsImmediate(t *testing.T) {
+	AssertExpectedInstruction(t, "adds x0, x1, #42", instructions.NewAddsImmediate(
+		registers.GPRegisterX0,
 		registers.GPorSPRegisterX1,
 		immediates.Immediate12(42),
-		immediates.DoSetFlags,
 	))
 
-	AssertExpectedInstruction(t, "adds sp, sp, #4095", instructions.ADDI(
-		registers.GPorSPRegisterSP,
+	AssertExpectedInstruction(t, "adds xzr, sp, #4095", instructions.NewAddsImmediate(
+		registers.GPRegisterXZR,
 		registers.GPorSPRegisterSP,
 		immediates.Immediate12(4095),
-		immediates.DoSetFlags,
 	))
 }

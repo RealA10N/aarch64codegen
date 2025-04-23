@@ -1,4 +1,3 @@
-// filepath: /Users/alonkr/Developer/aarch64codegen/instructions/add.go
 package instructions
 
 import (
@@ -8,86 +7,119 @@ import (
 	"alon.kr/x/aarch64codegen/registers"
 )
 
-// ADD instruction with register operands
-type Add uint32
+type AddShiftedRegister uint32
 
-func ADD(
+func NewAddShiftedRegister(
 	Xd registers.GPRegister,
 	Xn registers.GPRegister,
 	Xm registers.GPRegister,
-	setFlags immediates.SetFlags,
-) Add {
-	return Add(
+) AddShiftedRegister {
+	return AddShiftedRegister(
 		0x8B000000 |
-			(setFlags.Binary() << 29) |
 			(Xm.Binary() << 16) |
 			(Xn.Binary() << 5) |
 			(Xd.Binary()),
 	)
 }
 
-func (i Add) Binary() uint32 {
+func NewAddsShiftedRegister(
+	Xd registers.GPRegister,
+	Xn registers.GPRegister,
+	Xm registers.GPRegister,
+) AddShiftedRegister {
+	return NewAddShiftedRegister(Xd, Xn, Xm) | (1 << 29)
+}
+
+func (i AddShiftedRegister) Binary() uint32 {
 	return uint32(i)
 }
 
-func (i Add) Xd() registers.GPRegister {
+func (i AddShiftedRegister) Xd() registers.GPRegister {
 	return registers.GPRegister(i & 0x1F)
 }
 
-func (i Add) Xn() registers.GPRegister {
+func (i AddShiftedRegister) Xn() registers.GPRegister {
 	return registers.GPRegister((i >> 5) & 0x1F)
 }
 
-func (i Add) Xm() registers.GPRegister {
+func (i AddShiftedRegister) Xm() registers.GPRegister {
 	return registers.GPRegister((i >> 16) & 0x1F)
 }
 
-func (i Add) SetFlags() immediates.SetFlags {
+func (i AddShiftedRegister) SetFlags() immediates.SetFlags {
 	return immediates.SetFlagsFromBinary(uint32(i))
 }
 
-func (i Add) String() string {
+func (i AddShiftedRegister) String() string {
 	return fmt.Sprintf("add%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Xm())
 }
 
-// ADDI instruction (ADD with immediate)
-type AddImm uint32
+type AddImmediate uint32
 
-func ADDI(
+func NewAddImmediate(
 	Xd registers.GPorSPRegister,
 	Xn registers.GPorSPRegister,
 	imm immediates.Immediate12,
-	setFlags immediates.SetFlags,
-) AddImm {
-	return AddImm(
+) AddImmediate {
+	return AddImmediate(
 		0x91000000 |
-			(setFlags.Binary() << 29) |
 			(imm.Binary() << 10) |
 			(Xn.Binary() << 5) |
 			(Xd.Binary()),
 	)
 }
 
-func (i AddImm) Binary() uint32 {
+func (i AddImmediate) Binary() uint32 {
 	return uint32(i)
 }
 
-func (i AddImm) Xd() registers.GPorSPRegister {
+func (i AddImmediate) Xd() registers.GPorSPRegister {
 	return registers.GPorSPRegister(i & 0x1F)
 }
 
-func (i AddImm) Xn() registers.GPorSPRegister {
+func (i AddImmediate) Xn() registers.GPorSPRegister {
 	return registers.GPorSPRegister((i >> 5) & 0x1F)
 }
 
-func (i AddImm) Imm() immediates.Immediate12 {
+func (i AddImmediate) Imm() immediates.Immediate12 {
 	return immediates.Immediate12((i >> 10) & 0xFFF)
 }
 
-func (i AddImm) SetFlags() immediates.SetFlags {
-	return immediates.SetFlagsFromBinary(uint32(i))
+func (i AddImmediate) String() string {
+	return fmt.Sprintf("add %s, %s, %s", i.Xd(), i.Xn(), i.Imm())
 }
 
-func (i AddImm) String() string {
-	return fmt.Sprintf("add%s %s, %s, %s", i.SetFlags(), i.Xd(), i.Xn(), i.Imm())
+type AddsImmediate uint32
+
+func NewAddsImmediate(
+	Xd registers.GPRegister,
+	Xn registers.GPorSPRegister,
+	imm immediates.Immediate12,
+) AddsImmediate {
+	return AddsImmediate(
+		0xb1000000 |
+			(imm.Binary() << 10) |
+			(Xn.Binary() << 5) |
+			(Xd.Binary()),
+	)
+}
+
+func (i AddsImmediate) Binary() uint32 {
+	return uint32(i)
+}
+
+func (i AddsImmediate) Xd() registers.GPRegister {
+	return registers.GPRegister(i & 0x1F)
+}
+
+func (i AddsImmediate) Xn() registers.GPorSPRegister {
+	return registers.GPorSPRegister((i >> 5) & 0x1F)
+}
+
+func (i AddsImmediate) Immediate() immediates.Immediate12 {
+	return immediates.Immediate12((i >> 10) & 0xFFF)
+}
+
+func (i AddsImmediate) String() string {
+	return fmt.Sprintf("adds %s, %s, %s", i.Xd(), i.Xn(), i.Immediate())
 }
