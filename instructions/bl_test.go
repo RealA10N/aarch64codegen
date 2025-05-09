@@ -11,7 +11,7 @@ import (
 func AssertExpectedBlInstruction(t *testing.T, expected string, offset int32) {
 	off26, err := immediates.NewOffset26Align4(offset)
 	assert.NoError(t, err)
-	instruction := instructions.BL(off26)
+	instruction := instructions.NewBl(off26)
 	AssertExpectedInstruction(t, expected, instruction)
 }
 

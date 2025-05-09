@@ -8,7 +8,7 @@ import (
 
 type Bl uint32
 
-func BL(offset immediates.Offset26Align4) Bl {
+func NewBl(offset immediates.Offset26Align4) Bl {
 	return Bl(0b100101<<26 | offset.Binary())
 }
 

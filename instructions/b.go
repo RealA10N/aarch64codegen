@@ -8,7 +8,7 @@ import (
 
 type Branch uint32
 
-func B(offset immediates.Offset26Align4) Branch {
+func NewBranch(offset immediates.Offset26Align4) Branch {
 	return Branch(0b101<<26 | offset.Binary())
 }
 
